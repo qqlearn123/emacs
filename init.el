@@ -31,6 +31,10 @@
 (smartparens-global-mode)
 (require 'smartparens-config)
 
+; avy
+(global-set-key (kbd "C-'") 'avy-goto-char)
+(global-set-key (kbd "C-\"") 'avy-goto-char-2)
+
 ; helm
 (require 'helm-config)
 (setq helm-split-window-inside-p t)
@@ -40,10 +44,6 @@
 
 ; helm-swoop
 (setq helm-swoop-split-with-multiple-windows t)
-
-; avy
-(global-set-key (kbd "C-'") 'avy-goto-char)
-(global-set-key (kbd "C-\"") 'avy-goto-char-2)
 
 ; auto-complete
 (ac-config-default)
@@ -65,6 +65,9 @@
 
 ; undo-tree
 (global-undo-tree-mode)
+
+; goto-chg
+(global-set-key (kbd "C-<") 'goto-last-change)
 
 ; popup-kill-ring
 (global-set-key (kbd "M-y") 'popup-kill-ring)
@@ -192,5 +195,5 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (2048-game helm-swoop fill-column-indicator helm-mode-manager dashboard hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi yasnippet-snippets auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
+    (goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager dashboard hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi yasnippet-snippets auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
 
