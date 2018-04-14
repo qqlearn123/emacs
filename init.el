@@ -2,101 +2,97 @@
 ;;; Package Settings
 ;====================================================================
 (require 'package)
-; any source for package-archives (to add marmalade or melpa) goes here
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 
-; dashboard
+;; dashboard
 (dashboard-setup-startup-hook)
 
-; powerline
+;; powerline
 (powerline-default-theme)
 
-; anzu
+;; anzu
 (global-anzu-mode)
 
-; smooth-scrolling
+;; smooth-scrolling
 (smooth-scrolling-mode)
 (setq smooth-scroll-margin 2)
 
-; beacon
+;; beacon
 (beacon-mode)
 (setq beacon-size 25)
 
-; rainbow-delimiters
+;; rainbow-delimiters
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
-; smartparens
+;; smartparens
 (smartparens-global-mode)
 (require 'smartparens-config)
 
-; avy
+;; avy
 (global-set-key (kbd "C-'") 'avy-goto-char)
 (global-set-key (kbd "C-\"") 'avy-goto-char-2)
 
-; helm
+;; helm
 (require 'helm-config)
 (setq helm-split-window-inside-p t)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-x b") 'helm-mini)
 
-; helm-swoop
+;; helm-swoop
 (setq helm-swoop-split-with-multiple-windows t)
 
-; auto-complete
+;; auto-complete
 (ac-config-default)
 (setq-default ac-sources (push 'ac-source-yasnippet ac-sources))
 
-; jedi
+;; jedi
 (add-hook 'python-mode-hook 'jedi:setup)
 
-; yasnippet
+;; yasnippet
 (yas-global-mode)
 (global-set-key (kbd "C-c C-y t") 'yas-describe-tables)
 
-; auto-yasnippet
+;; auto-yasnippet
 (global-set-key (kbd "C-c C-y c") 'aya-create)
 (global-set-key (kbd "C-c C-y e") 'aya-expand)
 
-; neotree
+;; neotree
 (global-set-key [F8] 'neotree-toggle)
 
-; undo-tree
+;; undo-tree
 (global-undo-tree-mode)
 
-; goto-chg
+;; goto-chg
 (global-set-key (kbd "C-<") 'goto-last-change)
 
-; popup-kill-ring
+;; popup-kill-ring
 (global-set-key (kbd "M-y") 'popup-kill-ring)
 
-; hungry-delete
-(global-hungry-delete-mode)
-
-; move-text
+;; move-text
 (move-text-default-bindings)
 
-; expand-region
+;; expand-region
 (global-set-key (kbd "C-=") 'er/expand-region)
 
-; iedit
+;; iedit
 (require 'iedit)
 
-; multiple-cursors
+;; multiple-cursors
 (require 'multiple-cursors)
 (global-set-key (kbd "C-:") 'mc/mark-all-like-this)
 (global-set-key (kbd "C-S-c") 'mc/edit-lines)
 (define-key mc/keymap (kbd "<return>") nil)
 
-; which-key
+;; which-key
 (which-key-mode)
 
-; flycheck
+;; flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
-; fill-column-indicator
+;; fill-column-indicator
 (setq fci-rule-column 80)
 (setq fci-rule-width 11)
 
@@ -104,11 +100,11 @@
 ;====================================================================
 ;;; General Settings
 ;====================================================================
-; personal information
+;; personal information
 (setq user-full-name "Qilong Liu"
       user-mail-address "liu6699002@gmail.com")
 
-; initial window settings
+;; initial window settings
 (setq initial-frame-alist
       '((width . 110)
         (height . 35)))
@@ -118,62 +114,62 @@
        "%%b%%+--%d--%s@%s"
        (emacs-pid) (user-login-name) (system-name)))
 
-; set theme
+;; set theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (load-theme 'zenburn t)
 
-; disable startup message
+;; disable startup message
 (setq inhibit-startup-message t)
 
-; disable the display of menu/tool/scroll bars
+;; disable the display of menu/tool/scroll bars
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
-; turn the alarm off totally
+;; turn the alarm off totally
 (setq ring-bell-function 'ignore)
 
-; change the cursor type to bar
+;; change the cursor type to bar
 (setq-default cursor-type 'bar)
 
-; turn on highlighting current line
+;; turn on highlighting current line
 (global-hl-line-mode 1)
 
-; always show line numbers
+;; show line numbers
 (global-linum-mode 1)
 
-; show cursor posion within line
+;; show cursor posion within line
 (column-number-mode 1)
 
-; show time and date
+;; show time and date
 (setq display-time-day-and-date t)
 (display-time-mode 1)
 
-; show file size
+;; show file size
 (size-indication-mode 1)
 
-; wrap long lines by word boundary, and arrow up/down move by visual line, etc
+;; wrap long lines by word boundary, and arrow up/down move by visual line, etc
 (global-visual-line-mode 1)
 
-; allow one to see matching pairs of parentheses and other characters
+;; allow one to see matching pairs of parentheses and other characters
 (show-paren-mode 1)
 
-; change the indentation level for CC modes (C, C++, Java, etc.)
+;; change the indentation level for CC modes (C, C++, Java, etc.)
 (setq-default c-basic-offset 4)
 
-; make trailing whitespace at the end of a line visible
+;; make trailing whitespace at the end of a line visible
 (setq-default show-trailing-whitespace t)
 
-; let you interactively do things with buffers and files
+;; let you interactively do things with buffers and files
 (ido-mode 1)
 
-; make emacs just ask "y/n" instead
+;; make emacs just ask "y/n" instead
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-; let you move point from window to window using Shift and the arrow keys
+;; let you move point from window to window using Shift and the arrow keys
 (windmove-default-keybindings)
 
-; make all backup and autosave files go into a same place
+;; make all backup and autosave files go into a same place
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups/")))
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/autosaves/" t)))
 
