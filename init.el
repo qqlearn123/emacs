@@ -1,6 +1,6 @@
-;====================================================================
+;=========================================================================
 ;;; Package Settings
-;====================================================================
+;=========================================================================
 (require 'package)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")))
@@ -97,9 +97,9 @@
 (setq fci-rule-width 11)
 
 
-;====================================================================
+;=========================================================================
 ;;; General Settings
-;====================================================================
+;=========================================================================
 ;; personal information
 (setq user-full-name "Qilong Liu"
       user-mail-address "liu6699002@gmail.com")
@@ -114,10 +114,6 @@
        "%%b%%+--%d--%s@%s"
        (emacs-pid) (user-login-name) (system-name)))
 
-;; set theme
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(load-theme 'zenburn t)
-
 ;; disable startup message
 (setq inhibit-startup-message t)
 
@@ -126,8 +122,20 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
-;; turn the alarm off totally
-(setq ring-bell-function 'ignore)
+;; set theme
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(load-theme 'zenburn t)
+
+;; modeline settings
+; show cursor position
+(column-number-mode 1)
+
+; show time and date
+(setq display-time-day-and-date t)
+(display-time-mode 1)
+
+; show file size
+(size-indication-mode 1)
 
 ;; change the cursor type to bar
 (setq-default cursor-type 'bar)
@@ -135,21 +143,11 @@
 ;; turn on highlighting current line
 (global-hl-line-mode 1)
 
-;; show line numbers
-(global-linum-mode 1)
-
-;; show cursor posion within line
-(column-number-mode 1)
-
-;; show time and date
-(setq display-time-day-and-date t)
-(display-time-mode 1)
-
-;; show file size
-(size-indication-mode 1)
-
 ;; wrap long lines by word boundary, and arrow up/down move by visual line, etc
 (global-visual-line-mode 1)
+
+;; show line numbers
+(global-linum-mode 1)
 
 ;; allow one to see matching pairs of parentheses and other characters
 (show-paren-mode 1)
@@ -166,6 +164,9 @@
 ;; make emacs just ask "y/n" instead
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+;; turn the alarm off totally
+(setq ring-bell-function 'ignore)
+
 ;; let you move point from window to window using Shift and the arrow keys
 (windmove-default-keybindings)
 
@@ -174,9 +175,31 @@
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/autosaves/" t)))
 
 
-;====================================================================
+;=========================================================================
+;;; Org-mode Settings
+;=========================================================================
+(add-to-list 'load-path "~/.emacs.d/elpa/org-9.1.9")
+(require 'org)
+
+;; basics
+(setq org-src-fontify-natively t)
+(setq org-directory "D:/Downloaded/Org")
+(setq org-default-notes-file (concat org-directory "/capture.org"))
+
+;; capture
+(global-set-key (kbd "C-c c") 'org-capture)
+(setq org-capture-templates
+      '(("t" "Todo" entry (file+headline org-default-notes-file "Tasks")
+	 "* TODO %?\n Entered on %U\n From: %a" :empty-lines 1)
+	("n" "Note" entry (file+headline org-default-notes-file "Notes")
+	 "* %?\n %i\n\n Entered on %U\n From: %a" :empty-lines 1)
+	("j" "Journal" entry (file+datetree "D:/Downloaded/Org/journal.org")
+	 "* %?\n %i" :empty-lines 1)))
+
+
+;=========================================================================
 ;;; added after installing a package
-;====================================================================
+;=========================================================================
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
