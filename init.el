@@ -182,9 +182,24 @@
 (require 'org)
 
 ;; basics
+(setq org-log-into-drawer t)
 (setq org-src-fontify-natively t)
+(setq org-src-tab-acts-natively t)
+(setq org-export-use-babel nil)
+(setq org-export-with-smart-quotes t)
 (setq org-directory "D:/Downloaded/Org")
 (setq org-default-notes-file (concat org-directory "/capture.org"))
+(global-set-key (kbd "C-c l") 'org-store-link)
+
+;; todo
+(setq org-log-done t)
+(setq org-todo-keywords
+      '((sequence "TODO(t!)" "STARTED(s!)" "|" "DONE(d!)")
+        (sequence "|" "CANCELED(c!)")))
+
+;; agenda
+(setq org-agenda-files (list org-directory))
+(global-set-key (kbd "C-c a") 'org-agenda)
 
 ;; capture
 (global-set-key (kbd "C-c c") 'org-capture)
