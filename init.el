@@ -86,6 +86,12 @@
 (global-set-key (kbd "C-S-c") 'mc/edit-lines)
 (define-key mc/keymap (kbd "<return>") nil)
 
+;; buffer-move
+(global-set-key (kbd "<C-S-up>") 'buf-move-up)
+(global-set-key (kbd "<C-S-down>") 'buf-move-down)
+(global-set-key (kbd "<C-S-left>") 'buf-move-left)
+(global-set-key (kbd "<C-S-right>") 'buf-move-right)
+
 ;; which-key
 (which-key-mode)
 
@@ -204,12 +210,33 @@
 ;; capture
 (global-set-key (kbd "C-c c") 'org-capture)
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline org-default-notes-file "Tasks")
-	 "* TODO %?\n Entered on %U\n From: %a" :empty-lines 1)
-	("n" "Note" entry (file+headline org-default-notes-file "Notes")
+      '(("n" "Note" entry (file+headline org-default-notes-file "Notes")
 	 "* %?\n %i\n\n Entered on %U\n From: %a" :empty-lines 1)
+	("t" "Todo" entry (file+headline org-default-notes-file "Tasks")
+	 "* TODO %?\n Entered on %U\n From: %a" :empty-lines 1)
+	("s" "Study")
+	("sb" "Book" entry (file+headline "D:/Downloaded/Org/study.org" "Books")
+	 "* TODO %?\n Entered on %U" :empty-lines 1)
+	("sl" "Literature" entry (file+headline "D:/Downloaded/Org/study.org" "Literature")
+	 "* TODO %?\n Entered on %U" :empty-lines 1)
+	("sc" "Course" entry (file+headline "D:/Downloaded/Org/study.org" "Courses")
+	 "* TODO %?\n Entered on %U" :empty-lines 1)
+	("so" "Other" entry (file+headline "D:/Downloaded/Org/study.org" "Others")
+	 "* TODO %?\n Entered on %U" :empty-lines 1)
 	("j" "Journal" entry (file+datetree "D:/Downloaded/Org/journal.org")
 	 "* %?\n %i" :empty-lines 1)))
+
+;; babel
+(org-babel-do-load-languages 'org-babel-load-languages
+			     '((shell      . t)
+			       (emacs-lisp . t)
+			       (C          . t)
+			       (calc       . t)
+			       (java       . t)
+			       (js         . t)
+			       (python     . t)
+			       (R          . t)
+			       (matlab     . t)))
 
 
 ;=========================================================================
@@ -229,5 +256,5 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager dashboard hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi yasnippet-snippets auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
+    (buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager dashboard hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi yasnippet-snippets auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
 
