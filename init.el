@@ -170,6 +170,9 @@
 ;; make emacs just ask "y/n" instead
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+;; enable upcase-region command
+(put 'upcase-region 'disabled nil)
+
 ;; turn the alarm off totally
 (setq ring-bell-function 'ignore)
 
