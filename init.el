@@ -219,13 +219,13 @@
 	 "* TODO %?\n Entered on %U\n From: %a" :empty-lines 1)
 	("s" "Study")
 	("sb" "Book" entry (file+headline "D:/Downloaded/Org/study.org" "Books")
-	 "* TODO %?\n Entered on %U" :empty-lines 1)
+	 "* TODO %?" :empty-lines 1)
 	("sl" "Literature" entry (file+headline "D:/Downloaded/Org/study.org" "Literature")
-	 "* TODO %?\n Entered on %U" :empty-lines 1)
+	 "* TODO %?" :empty-lines 1)
 	("sc" "Course" entry (file+headline "D:/Downloaded/Org/study.org" "Courses")
-	 "* TODO %?\n Entered on %U" :empty-lines 1)
+	 "* TODO %?" :empty-lines 1)
 	("so" "Other" entry (file+headline "D:/Downloaded/Org/study.org" "Others")
-	 "* TODO %?\n Entered on %U" :empty-lines 1)
+	 "* TODO %?" :empty-lines 1)
 	("j" "Journal" entry (file+datetree "D:/Downloaded/Org/journal.org")
 	 "* %?\n %i" :empty-lines 1)))
 
@@ -259,5 +259,5 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager dashboard hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi yasnippet-snippets auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
+    (htmlize buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager dashboard hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi yasnippet-snippets auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
 
