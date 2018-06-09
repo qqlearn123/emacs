@@ -179,6 +179,9 @@
 ;; let you move point from window to window using Shift and the arrow keys
 (windmove-default-keybindings)
 
+;; set the default directory
+(setq default-directory "~/")
+
 ;; make all backup and autosave files go into a same place
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups/")))
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/autosaves/" t)))
@@ -220,7 +223,7 @@
 	("s" "Study")
 	("sb" "Book" entry (file+headline "D:/Downloaded/Org/study.org" "Books")
 	 "* TODO %?" :empty-lines 1)
-	("sl" "Literature" entry (file+headline "D:/Downloaded/Org/study.org" "Literature")
+	("sp" "Paper" entry (file+headline "D:/Downloaded/Org/study.org" "Papers")
 	 "* TODO %?" :empty-lines 1)
 	("sc" "Course" entry (file+headline "D:/Downloaded/Org/study.org" "Courses")
 	 "* TODO %?" :empty-lines 1)
