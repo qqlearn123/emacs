@@ -10,10 +10,15 @@
 (dashboard-setup-startup-hook)
 
 ;; powerline
-(powerline-default-theme)
+(setq powerline-default-separator 'slant)
+
+;; spaceline
+(spaceline-emacs-theme)
+(spaceline-helm-mode)
 
 ;; anzu
 (global-anzu-mode)
+(setq anzu-cons-mode-line-p nil)
 
 ;; smooth-scrolling
 (smooth-scrolling-mode)
@@ -36,13 +41,12 @@
 
 ;; helm
 (require 'helm-config)
-(setq helm-split-window-inside-p t)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-x b") 'helm-mini)
 
 ;; helm-swoop
-(setq helm-swoop-split-with-multiple-windows t)
+(global-set-key (kbd "C-s") 'helm-swoop)
 
 ;; auto-complete
 (ac-config-default)
@@ -96,7 +100,7 @@
 (which-key-mode)
 
 ;; flycheck
-(add-hook 'after-init-hook #'global-flycheck-mode)
+;(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; fill-column-indicator
 (setq fci-rule-column 80)
@@ -129,8 +133,8 @@
 (scroll-bar-mode -1)
 
 ;; set theme
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(load-theme 'zenburn t)
+;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(load-theme 'spacemacs-dark t)
 
 ;; modeline settings
 ; show cursor position
@@ -262,5 +266,5 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (htmlize buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager dashboard hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi yasnippet-snippets auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
+    (spaceline spacemacs-theme zenburn-theme doom-themes htmlize buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager dashboard hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi yasnippet-snippets auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
 
