@@ -6,11 +6,8 @@
                          ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 
-;; dashboard
-(dashboard-setup-startup-hook)
-
 ;; powerline
-(setq powerline-default-separator 'slant)
+(setq powerline-default-separator 'wave)
 
 ;; spaceline
 (spaceline-emacs-theme)
@@ -24,6 +21,10 @@
 (smooth-scrolling-mode)
 (setq smooth-scroll-margin 2)
 
+;; golden-ratio
+(golden-ratio-mode 1)
+(setq golden-ratio-auto-scale t)
+
 ;; beacon
 (beacon-mode)
 (setq beacon-size 25)
@@ -34,6 +35,12 @@
 ;; smartparens
 (smartparens-global-mode)
 (require 'smartparens-config)
+
+;; highlight-numbers
+(highlight-numbers-mode 1)
+
+;; volatile-highlights
+(volatile-highlights-mode 1)
 
 ;; avy
 (global-set-key (kbd "C-'") 'avy-goto-char)
@@ -81,6 +88,12 @@
 ;; expand-region
 (global-set-key (kbd "C-=") 'er/expand-region)
 
+;; auto-highlight-symbol
+(global-auto-highlight-symbol-mode 1)
+(define-key auto-highlight-symbol-mode-map (kbd "<M-S-left>") nil)
+(define-key auto-highlight-symbol-mode-map (kbd "<M-S-right>") nil)
+(define-key auto-highlight-symbol-mode-map (kbd "M--") nil)
+
 ;; iedit
 (require 'iedit)
 
@@ -105,6 +118,15 @@
 ;; fill-column-indicator
 (setq fci-rule-column 80)
 (setq fci-rule-width 11)
+
+;; diminish
+(diminish 'anzu-mode)
+(diminish 'beacon-mode)
+(diminish 'undo-tree-mode)
+(diminish 'which-key-mode)
+(diminish 'visual-line-mode)
+(diminish 'golden-ratio-mode)
+(diminish 'volatile-highlights-mode)
 
 
 ;=========================================================================
@@ -133,8 +155,8 @@
 (scroll-bar-mode -1)
 
 ;; set theme
-;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(load-theme 'spacemacs-dark t)
+(load-theme 'zenburn t)
+;(load-theme 'spacemacs-dark t)
 
 ;; modeline settings
 ; show cursor position
@@ -266,5 +288,5 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (spaceline spacemacs-theme zenburn-theme doom-themes htmlize buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager dashboard hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi yasnippet-snippets auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
+    (highlight-numbers auto-highlight-symbol diminish golden-ratio volatile-highlights spaceline spacemacs-theme zenburn-theme doom-themes htmlize buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi yasnippet-snippets auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
 
