@@ -37,7 +37,7 @@
 (require 'smartparens-config)
 
 ;; highlight-numbers
-(highlight-numbers-mode 1)
+(add-hook 'prog-mode-hook 'highlight-numbers-mode)
 
 ;; volatile-highlights
 (volatile-highlights-mode 1)
