@@ -57,6 +57,7 @@
 
 ;; auto-complete
 (ac-config-default)
+(add-to-list 'ac-modes 'org-mode)
 (setq-default ac-sources (push 'ac-source-yasnippet ac-sources))
 
 ;; jedi
@@ -139,7 +140,8 @@
 ;; initial window settings
 (setq initial-frame-alist
       '((width . 110)
-        (height . 35)))
+        (height . 35)
+	(font . "Consolas-10")))
 
 (setq frame-title-format
       (format
