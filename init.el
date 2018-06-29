@@ -1,6 +1,6 @@
-;=========================================================================
+;;=========================================================================
 ;;; Package Settings
-;=========================================================================
+;;=========================================================================
 (require 'package)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")))
@@ -48,6 +48,7 @@
 
 ;; helm
 (require 'helm-config)
+(helm-mode)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-x b") 'helm-mini)
@@ -79,6 +80,9 @@
 
 ;; goto-chg
 (global-set-key (kbd "C-<") 'goto-last-change)
+
+;; magit
+(global-set-key (kbd "C-x g") 'magit-status)
 
 ;; popup-kill-ring
 (global-set-key (kbd "M-y") 'popup-kill-ring)
@@ -122,17 +126,20 @@
 
 ;; diminish
 (diminish 'anzu-mode)
+(diminish' helm-mode)
 (diminish 'beacon-mode)
 (diminish 'undo-tree-mode)
 (diminish 'which-key-mode)
 (diminish 'visual-line-mode)
+(diminish 'auto-revert-mode)
 (diminish 'golden-ratio-mode)
 (diminish 'volatile-highlights-mode)
+(diminish 'yas-minor-mode "YA")
 
 
-;=========================================================================
+;;=========================================================================
 ;;; General Settings
-;=========================================================================
+;;=========================================================================
 ;; personal information
 (setq user-full-name "Qilong Liu"
       user-mail-address "liu6699002@gmail.com")
@@ -193,7 +200,7 @@
 (setq-default show-trailing-whitespace t)
 
 ;; let you interactively do things with buffers and files
-(ido-mode 1)
+;(ido-mode 1)
 
 ;; make emacs just ask "y/n" instead
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -215,9 +222,9 @@
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/autosaves/" t)))
 
 
-;=========================================================================
+;;=========================================================================
 ;;; Org-mode Settings
-;=========================================================================
+;;=========================================================================
 (add-to-list 'load-path "~/.emacs.d/elpa/org-9.1.9")
 (require 'org)
 
@@ -273,9 +280,9 @@
 			       (matlab     . t)))
 
 
-;=========================================================================
+;;=========================================================================
 ;;; added after installing a package
-;=========================================================================
+;;=========================================================================
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -290,5 +297,5 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (highlight-numbers auto-highlight-symbol diminish golden-ratio volatile-highlights spaceline spacemacs-theme zenburn-theme doom-themes htmlize buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi yasnippet-snippets auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
+    (git-timemachine magit highlight-numbers auto-highlight-symbol diminish golden-ratio volatile-highlights spaceline spacemacs-theme zenburn-theme doom-themes htmlize buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi yasnippet-snippets auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
 
