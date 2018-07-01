@@ -210,6 +210,9 @@
 ;; let you interactively do things with buffers and files
 ;(ido-mode 1)
 
+;; revert buffers automatically when underlying files are changed externally
+(global-auto-revert-mode t)
+
 ;; make emacs just ask "y/n" instead
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -224,6 +227,12 @@
 
 ;; set the default directory
 (setq default-directory "~/")
+
+;; build a list of recently opened files saved across sessions
+(recentf-mode 1)
+(setq recentf-max-saved-items 100
+      recentf-max-menu-items 100)
+(run-at-time nil (* 5 60) 'recentf-save-list)
 
 ;; make all backup and autosave files go into a same place
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups/")))
