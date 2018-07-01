@@ -52,6 +52,7 @@
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-x b") 'helm-mini)
+(global-set-key (kbd "C-M-y") 'helm-show-kill-ring)
 
 ;; helm-swoop
 (global-set-key (kbd "C-s") 'helm-swoop)
@@ -83,6 +84,9 @@
 
 ;; magit
 (global-set-key (kbd "C-x g") 'magit-status)
+
+;; whole-line-or-region
+(whole-line-or-region-global-mode)
 
 ;; popup-kill-ring
 (global-set-key (kbd "M-y") 'popup-kill-ring)
@@ -134,6 +138,7 @@
 (diminish 'auto-revert-mode)
 (diminish 'golden-ratio-mode)
 (diminish 'volatile-highlights-mode)
+(diminish 'whole-line-or-region-local-mode)
 (diminish 'yas-minor-mode "YA")
 
 
@@ -297,5 +302,5 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (git-timemachine magit highlight-numbers auto-highlight-symbol diminish golden-ratio volatile-highlights spaceline spacemacs-theme zenburn-theme doom-themes htmlize buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi yasnippet-snippets auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
+    (whole-line-or-region git-timemachine magit highlight-numbers auto-highlight-symbol diminish golden-ratio volatile-highlights spaceline spacemacs-theme zenburn-theme doom-themes htmlize buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi yasnippet-snippets auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
 
