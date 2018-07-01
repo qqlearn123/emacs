@@ -130,7 +130,7 @@
 
 ;; diminish
 (diminish 'anzu-mode)
-(diminish' helm-mode)
+(diminish 'helm-mode)
 (diminish 'beacon-mode)
 (diminish 'undo-tree-mode)
 (diminish 'which-key-mode)
@@ -153,7 +153,7 @@
 (setq initial-frame-alist
       '((width . 110)
         (height . 35)
-	(font . "Consolas-10")))
+        (font . "Consolas-10")))
 
 (setq frame-title-format
       (format
@@ -197,6 +197,9 @@
 
 ;; allow one to see matching pairs of parentheses and other characters
 (show-paren-mode 1)
+
+;; control whether tabs are used for indentation
+(setq-default indent-tabs-mode nil)
 
 ;; change the indentation level for CC modes (C, C++, Java, etc.)
 (setq-default c-basic-offset 4)
@@ -257,32 +260,32 @@
 (global-set-key (kbd "C-c c") 'org-capture)
 (setq org-capture-templates
       '(("n" "Note" entry (file+headline org-default-notes-file "Notes")
-	 "* %?\n %i\n\n Entered on %U\n From: %a" :empty-lines 1)
-	("t" "Todo" entry (file+headline org-default-notes-file "Tasks")
-	 "* TODO %?\n Entered on %U\n From: %a" :empty-lines 1)
-	("s" "Study")
-	("sb" "Book" entry (file+headline "D:/Downloaded/Org/study.org" "Books")
-	 "* TODO %?" :empty-lines 1)
-	("sp" "Paper" entry (file+headline "D:/Downloaded/Org/study.org" "Papers")
-	 "* TODO %?" :empty-lines 1)
-	("sc" "Course" entry (file+headline "D:/Downloaded/Org/study.org" "Courses")
-	 "* TODO %?" :empty-lines 1)
-	("so" "Other" entry (file+headline "D:/Downloaded/Org/study.org" "Others")
-	 "* TODO %?" :empty-lines 1)
-	("j" "Journal" entry (file+datetree "D:/Downloaded/Org/journal.org")
-	 "* %?\n %i" :empty-lines 1)))
+         "* %?\n %i\n\n Entered on %U\n From: %a" :empty-lines 1)
+        ("t" "Todo" entry (file+headline org-default-notes-file "Tasks")
+         "* TODO %?\n Entered on %U\n From: %a" :empty-lines 1)
+        ("s" "Study")
+        ("sb" "Book" entry (file+headline "D:/Downloaded/Org/study.org" "Books")
+         "* TODO %?" :empty-lines 1)
+        ("sp" "Paper" entry (file+headline "D:/Downloaded/Org/study.org" "Papers")
+         "* TODO %?" :empty-lines 1)
+        ("sc" "Course" entry (file+headline "D:/Downloaded/Org/study.org" "Courses")
+         "* TODO %?" :empty-lines 1)
+        ("so" "Other" entry (file+headline "D:/Downloaded/Org/study.org" "Others")
+         "* TODO %?" :empty-lines 1)
+        ("j" "Journal" entry (file+datetree "D:/Downloaded/Org/journal.org")
+         "* %?\n %i" :empty-lines 1)))
 
 ;; babel
 (org-babel-do-load-languages 'org-babel-load-languages
-			     '((shell      . t)
-			       (emacs-lisp . t)
-			       (C          . t)
-			       (calc       . t)
-			       (java       . t)
-			       (js         . t)
-			       (python     . t)
-			       (R          . t)
-			       (matlab     . t)))
+                             '((shell      . t)
+                               (emacs-lisp . t)
+                               (C          . t)
+                               (calc       . t)
+                               (java       . t)
+                               (js         . t)
+                               (python     . t)
+                               (R          . t)
+                               (matlab     . t)))
 
 
 ;;=========================================================================
