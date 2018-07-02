@@ -6,6 +6,10 @@
                          ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 
+;; theme
+(load-theme 'zenburn t)
+;(load-theme 'spacemacs-dark t)
+
 ;; powerline
 (setq powerline-default-separator 'wave)
 
@@ -205,10 +209,6 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-
-;; set theme
-(load-theme 'zenburn t)
-;(load-theme 'spacemacs-dark t)
 
 ;; modeline settings
 ; show cursor position
