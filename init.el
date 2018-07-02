@@ -40,6 +40,11 @@
 (smartparens-global-mode)
 (require 'smartparens-config)
 
+;; hlinum
+(hlinum-activate)
+(set-face-foreground 'linum-highlight-face "black")
+(set-face-background 'linum-highlight-face "#FBB117")
+
 ;; highlight-numbers
 (add-hook 'prog-mode-hook 'highlight-numbers-mode)
 
@@ -76,6 +81,12 @@
 ;; auto-yasnippet
 (global-set-key (kbd "C-c C-y c") 'aya-create)
 (global-set-key (kbd "C-c C-y e") 'aya-expand)
+
+;;  dumb-jump
+(setq dumb-jump-selector 'helm)
+(global-set-key (kbd "M-g j") 'dumb-jump-go)
+(global-set-key (kbd "M-g b") 'dumb-jump-back)
+(global-set-key (kbd "M-g q") 'dumb-jump-quick-look)
 
 ;; neotree
 (global-set-key [F8] 'neotree-toggle)
@@ -358,5 +369,5 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (git-gutter-fringe yafolding git-gutter whole-line-or-region git-timemachine magit highlight-numbers auto-highlight-symbol diminish golden-ratio volatile-highlights spaceline spacemacs-theme zenburn-theme doom-themes htmlize buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi yasnippet-snippets auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
+    (dumb-jump hlinum git-gutter-fringe yafolding git-gutter whole-line-or-region git-timemachine magit highlight-numbers auto-highlight-symbol diminish golden-ratio volatile-highlights spaceline spacemacs-theme zenburn-theme doom-themes htmlize buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi yasnippet-snippets auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
 
