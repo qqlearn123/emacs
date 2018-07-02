@@ -82,9 +82,35 @@
 ;; goto-chg
 (global-set-key (kbd "C-<") 'goto-last-change)
 
-;; git-gutter
-(global-git-gutter-mode +1)
-(git-gutter:linum-setup)
+;; git-gutter and git-gutter-fringe
+(require 'git-gutter-fringe)
+(global-git-gutter-mode)
+(set-face-foreground 'git-gutter-fr:added "green")
+(set-face-foreground 'git-gutter-fr:deleted "red")
+(set-face-foreground 'git-gutter-fr:modified "yellow")
+(fringe-helper-define 'git-gutter-fr:added nil
+  "...XX..."
+  "...XX..."
+  "...XX..."
+  "...XX..."
+  "XXXXXXXX"
+  "XXXXXXXX"
+  "...XX..."
+  "...XX..."
+  "...XX..."
+  "...XX...")
+(fringe-helper-define 'git-gutter-fr:deleted nil
+  "XXXXXXXX"
+  "XXXXXXXX"
+  "XXXXXXXX")
+(fringe-helper-define 'git-gutter-fr:modified nil
+  "XXXXXXXX"
+  "XXXXXXXX"
+  "........"
+  "........"
+  "........"
+  "XXXXXXXX"
+  "XXXXXXXX")
 
 ;; magit
 (global-set-key (kbd "C-x g") 'magit-status)
@@ -127,6 +153,13 @@
 
 ;; flycheck
 ;(add-hook 'after-init-hook #'global-flycheck-mode)
+
+;; yafolding
+(add-hook 'prog-mode-hook #'yafolding-mode)
+(define-key yafolding-mode-map (kbd "<C-S-return>") nil)
+(define-key yafolding-mode-map (kbd "<C-M-return>") nil)
+(define-key yafolding-mode-map (kbd "<C-return>") nil)
+(define-key yafolding-mode-map (kbd "C-`") 'yafolding-toggle-element)
 
 ;; fill-column-indicator
 (setq fci-rule-column 80)
@@ -200,8 +233,14 @@
 ;; show line numbers
 (global-linum-mode 1)
 
+;; customize the width of both fringes
+(fringe-mode '(16 . 8))
+
 ;; allow one to see matching pairs of parentheses and other characters
 (show-paren-mode 1)
+
+;; make trailing whitespace at the end of a line visible
+(setq-default show-trailing-whitespace t)
 
 ;; control whether tabs are used for indentation
 (setq-default indent-tabs-mode nil)
@@ -209,8 +248,8 @@
 ;; change the indentation level for CC modes (C, C++, Java, etc.)
 (setq-default c-basic-offset 4)
 
-;; make trailing whitespace at the end of a line visible
-(setq-default show-trailing-whitespace t)
+;; remove text in active region if inserting text
+(delete-selection-mode 1)
 
 ;; let you interactively do things with buffers and files
 ;(ido-mode 1)
@@ -319,5 +358,5 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (git-gutter whole-line-or-region git-timemachine magit highlight-numbers auto-highlight-symbol diminish golden-ratio volatile-highlights spaceline spacemacs-theme zenburn-theme doom-themes htmlize buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi yasnippet-snippets auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
+    (git-gutter-fringe yafolding git-gutter whole-line-or-region git-timemachine magit highlight-numbers auto-highlight-symbol diminish golden-ratio volatile-highlights spaceline spacemacs-theme zenburn-theme doom-themes htmlize buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi yasnippet-snippets auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
 
