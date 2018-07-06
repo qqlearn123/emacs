@@ -287,7 +287,7 @@
 (recentf-mode 1)
 (setq recentf-max-saved-items 100
       recentf-max-menu-items 100)
-(run-at-time nil (* 5 60) 'recentf-save-list)
+(run-at-time nil (* 60 60) 'recentf-save-list)
 
 ;; make all backup and autosave files go into a same place
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups/")))
