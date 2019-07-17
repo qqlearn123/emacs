@@ -29,6 +29,11 @@
 (golden-ratio-mode 1)
 (setq golden-ratio-auto-scale t)
 
+;; popwin
+(require 'popwin)
+(popwin-mode 1)
+(push '(Buffer-menu-mode :noselect t) popwin:special-display-config)
+
 ;; beacon
 (beacon-mode)
 (setq beacon-size 25)
@@ -42,6 +47,13 @@
 ;; smartparens
 (smartparens-global-mode)
 (require 'smartparens-config)
+
+;; smart-forward
+(require 'smart-forward)
+(global-set-key (kbd "<C-M-up>") 'smart-up)
+(global-set-key (kbd "<C-M-down>") 'smart-down)
+(global-set-key (kbd "<C-M-left>") 'smart-backward)
+(global-set-key (kbd "<C-M-right>") 'smart-forward)
 
 ;; hlinum
 (hlinum-activate)
@@ -57,6 +69,9 @@
 ;; avy
 (global-set-key (kbd "C-'") 'avy-goto-char)
 (global-set-key (kbd "C-\"") 'avy-goto-char-2)
+
+;; ace-window
+(global-set-key (kbd "C-x o") 'ace-window)
 
 ;; helm
 (require 'helm-config)
@@ -141,6 +156,10 @@
 
 ;; move-text
 (move-text-default-bindings)
+
+;; change-inner
+(global-set-key (kbd "M-i") 'change-inner)
+(global-set-key (kbd "M-o") 'change-outer)
 
 ;; expand-region
 (global-set-key (kbd "C-=") 'er/expand-region)
@@ -413,5 +432,5 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (ac-emmet json-mode ac-html tern tern-auto-complete js2-mode react-snippets emmet-mode web-mode rainbow-identifiers dumb-jump hlinum git-gutter-fringe yafolding git-gutter whole-line-or-region git-timemachine magit highlight-numbers auto-highlight-symbol diminish golden-ratio volatile-highlights spaceline spacemacs-theme zenburn-theme doom-themes htmlize buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi yasnippet-snippets auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
+    (ace-window change-inner popwin smart-forward ac-emmet json-mode ac-html tern tern-auto-complete js2-mode react-snippets emmet-mode web-mode rainbow-identifiers dumb-jump hlinum git-gutter-fringe yafolding git-gutter whole-line-or-region git-timemachine magit highlight-numbers auto-highlight-symbol diminish golden-ratio volatile-highlights spaceline spacemacs-theme zenburn-theme doom-themes htmlize buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi yasnippet-snippets auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
 
