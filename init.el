@@ -36,6 +36,9 @@
 ;; rainbow-delimiters
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
+;; rainbow-identifiers
+(add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
+
 ;; smartparens
 (smartparens-global-mode)
 (require 'smartparens-config)
@@ -82,7 +85,7 @@
 (global-set-key (kbd "C-c C-y c") 'aya-create)
 (global-set-key (kbd "C-c C-y e") 'aya-expand)
 
-;;  dumb-jump
+;; dumb-jump
 (setq dumb-jump-selector 'helm)
 (global-set-key (kbd "M-g j") 'dumb-jump-go)
 (global-set-key (kbd "M-g b") 'dumb-jump-back)
@@ -143,7 +146,8 @@
 (global-set-key (kbd "C-=") 'er/expand-region)
 
 ;; auto-highlight-symbol
-(global-auto-highlight-symbol-mode 1)
+(require 'auto-highlight-symbol)
+(add-hook 'prog-mode-hook #'auto-highlight-symbol-mode)
 (define-key auto-highlight-symbol-mode-map (kbd "<M-S-left>") nil)
 (define-key auto-highlight-symbol-mode-map (kbd "<M-S-right>") nil)
 (define-key auto-highlight-symbol-mode-map (kbd "M--") nil)
@@ -179,6 +183,46 @@
 ;; fill-column-indicator
 (setq fci-rule-column 80)
 (setq fci-rule-width 11)
+
+;; json-mode
+
+;; web-mode
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
+(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
+(setq web-mode-enable-current-element-highlight t)
+
+;; ac-html
+(defun setup-ac-for-html ()
+  (require 'ac-html)
+  (require 'ac-html-default-data-provider)
+  (ac-html-enable-data-provider 'ac-html-default-data-provider)
+  (ac-html-setup)
+  (push 'ac-source-html-tag ac-sources)
+  (push 'ac-source-html-attr ac-sources)
+  (push 'ac-source-html-attrv ac-sources)
+  (auto-complete-mode))
+(add-hook 'html-mode-hook 'setup-ac-for-html)
+(add-hook 'web-mode-hook 'setup-ac-for-html)
+
+;; emmet-mode
+(add-hook 'sgml-mode-hook 'emmet-mode)
+(add-hook 'css-mode-hook 'emmet-mode)
+(add-hook 'web-mode-hook 'emmet-mode)
+
+;; ac-emmet
+(add-hook 'sgml-mode-hook 'ac-emmet-html-setup)
+(add-hook 'css-mode-hook 'ac-emmet-css-setup)
+(add-hook 'web-mode-hook 'ac-emmet-html-setup)
+
+;; tern-mode
+(add-hook 'web-mode-hook 'tern-mode)
+
+;; tern-auto-complete
+(eval-after-load 'tern
+  '(progn
+     (tern-ac-setup)))
+(global-set-key (quote [C-tab]) 'tern-ac-complete)
 
 ;; diminish
 (diminish 'anzu-mode)
@@ -369,5 +413,5 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (dumb-jump hlinum git-gutter-fringe yafolding git-gutter whole-line-or-region git-timemachine magit highlight-numbers auto-highlight-symbol diminish golden-ratio volatile-highlights spaceline spacemacs-theme zenburn-theme doom-themes htmlize buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi yasnippet-snippets auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
+    (ac-emmet json-mode ac-html tern tern-auto-complete js2-mode react-snippets emmet-mode web-mode rainbow-identifiers dumb-jump hlinum git-gutter-fringe yafolding git-gutter whole-line-or-region git-timemachine magit highlight-numbers auto-highlight-symbol diminish golden-ratio volatile-highlights spaceline spacemacs-theme zenburn-theme doom-themes htmlize buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi yasnippet-snippets auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
 
