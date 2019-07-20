@@ -38,6 +38,10 @@
 (beacon-mode)
 (setq beacon-size 25)
 
+;; rainbow-mode
+(setq rainbow-x-colors nil)
+(add-hook 'prog-mode-hook 'rainbow-mode)
+
 ;; rainbow-delimiters
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
@@ -69,6 +73,8 @@
 ;; avy
 (global-set-key (kbd "C-'") 'avy-goto-char)
 (global-set-key (kbd "C-\"") 'avy-goto-char-2)
+(global-set-key (kbd "C-:") 'avy-goto-word-1)
+(global-set-key (kbd "C-|") 'avy-goto-line)
 
 ;; ace-window
 (global-set-key (kbd "C-x o") 'ace-window)
@@ -104,6 +110,12 @@
 ;; yasnippet
 (yas-global-mode)
 (global-set-key (kbd "C-c C-y t") 'yas-describe-tables)
+
+;; yasnippet-snippets
+;; NOTE: need to delete "param-comment", "return-comment",
+;;       "type-inline-comment", "type-multiline-comment"
+;;       inside js-mode as they have conditions on js2-mode
+(require 'yasnippet-snippets)
 
 ;; auto-yasnippet
 (global-set-key (kbd "C-c C-y c") 'aya-create)
@@ -221,6 +233,7 @@
 (setq web-mode-enable-current-element-highlight t)
 
 ;; ac-html
+;; NOTE: could make the editing slow if added
 (defun setup-ac-for-html ()
   (require 'ac-html)
   (require 'ac-html-default-data-provider)
@@ -230,8 +243,8 @@
   (push 'ac-source-html-attr ac-sources)
   (push 'ac-source-html-attrv ac-sources)
   (auto-complete-mode))
-(add-hook 'html-mode-hook 'setup-ac-for-html)
-(add-hook 'web-mode-hook 'setup-ac-for-html)
+;(add-hook 'html-mode-hook 'setup-ac-for-html)
+;(add-hook 'web-mode-hook 'setup-ac-for-html)
 
 ;; emmet-mode
 (add-hook 'sgml-mode-hook 'emmet-mode)
@@ -252,6 +265,11 @@
      (tern-ac-setup)))
 (global-set-key (quote [C-tab]) 'tern-ac-complete)
 
+;; add-node-modules-path
+(require 'add-node-modules-path)
+(add-hook 'js-mode-hook #'add-node-modules-path)
+(add-hook 'web-mode-hook #'add-node-modules-path)
+
 ;; diminish
 (diminish 'anzu-mode)
 (diminish 'helm-mode)
@@ -265,7 +283,10 @@
 (diminish 'volatile-highlights-mode)
 (diminish 'whole-line-or-region-local-mode)
 (diminish 'yas-minor-mode "YA")
-
+(add-hook 'rainbow-mode-hook (lambda () (diminish 'rainbow-mode)))
+(add-hook 'tern-mode-hook (lambda () (diminish 'tern-mode "TN")))
+(add-hook 'emmet-mode-hook (lambda () (diminish 'emmet-mode "EM")))
+(add-hook 'eldoc-mode-hook (lambda () (diminish 'eldoc-mode "EL")))
 
 ;;=========================================================================
 ;;; General Settings
@@ -441,5 +462,5 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (indium ace-window change-inner popwin smart-forward ac-emmet json-mode ac-html tern tern-auto-complete js2-mode react-snippets emmet-mode web-mode rainbow-identifiers dumb-jump hlinum git-gutter-fringe yafolding git-gutter whole-line-or-region git-timemachine magit highlight-numbers auto-highlight-symbol diminish golden-ratio volatile-highlights spaceline spacemacs-theme zenburn-theme doom-themes htmlize buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi yasnippet-snippets auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
+    (add-node-modules-path rainbow-mode tide indium ace-window change-inner popwin smart-forward ac-emmet json-mode ac-html tern tern-auto-complete js2-mode react-snippets emmet-mode web-mode rainbow-identifiers dumb-jump hlinum git-gutter-fringe yafolding git-gutter whole-line-or-region git-timemachine magit highlight-numbers auto-highlight-symbol diminish golden-ratio volatile-highlights spaceline spacemacs-theme doom-themes htmlize buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
 
