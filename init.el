@@ -98,11 +98,11 @@
 ;; ac-company
 (add-to-list 'load-path "~/.emacs.d/elpa/ac-company")
 (require 'ac-company)
-(ac-company-define-source ac-source-company-elisp company-elisp
-                          (symbol . "z"))
-(add-hook 'emacs-lisp-mode-hook
-          (lambda ()
-            (add-to-list 'ac-sources 'ac-source-company-elisp)))
+;(ac-company-define-source ac-source-company-elisp company-elisp
+;                          (symbol . "z"))
+;(add-hook 'emacs-lisp-mode-hook
+;          (lambda ()
+;            (add-to-list 'ac-sources 'ac-source-company-elisp)))
 
 ;; jedi
 (add-hook 'python-mode-hook 'jedi:setup)
@@ -257,13 +257,22 @@
 (add-hook 'web-mode-hook 'ac-emmet-html-setup)
 
 ;; tern-mode
+(add-hook 'js-mode-hook 'tern-mode)
 (add-hook 'web-mode-hook 'tern-mode)
 
 ;; tern-auto-complete
 (eval-after-load 'tern
   '(progn
-     (tern-ac-setup)))
-(global-set-key (quote [C-tab]) 'tern-ac-complete)
+     (tern-ac-setup)
+     (define-key tern-mode-keymap (kbd "<C-tab>") 'tern-ac-complete)))
+
+;; tide
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (eldoc-mode 1)
+  (tide-hl-identifier-mode 1)
+  (ac-company-define-source ac-source-company-tide company-tide))
 
 ;; add-node-modules-path
 (require 'add-node-modules-path)
