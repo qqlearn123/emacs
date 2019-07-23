@@ -37,6 +37,7 @@
 ;; beacon
 (beacon-mode)
 (setq beacon-size 25)
+(setq beacon-color "#F8C471")
 
 ;; rainbow-mode
 (setq rainbow-x-colors nil)
@@ -210,9 +211,6 @@
 ;; which-key
 (which-key-mode)
 
-;; flycheck
-;(add-hook 'after-init-hook #'global-flycheck-mode)
-
 ;; yafolding
 (add-hook 'prog-mode-hook #'yafolding-mode)
 (define-key yafolding-mode-map (kbd "<C-S-return>") nil)
@@ -224,17 +222,50 @@
 (setq fci-rule-column 80)
 (setq fci-rule-width 11)
 
+;; flycheck
+;(add-hook 'after-init-hook #'global-flycheck-mode)
+(setq-default flycheck-indication-mode 'right-fringe)
+(flycheck-add-mode 'javascript-eslint 'web-mode)
+
+;; markdown-mode
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
+(setq markdown-command "D:/Apps/MultiMarkdown-Windows-6.4.0/bin/multimarkdown.exe")
+
 ;; json-mode
 
 ;; web-mode
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
 (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
+(setq web-mode-code-indent-offset 2)
+(setq web-mode-markup-indent-offset 2)
+(setq web-mode-css-indent-offset 2)
 (setq web-mode-enable-current-element-highlight t)
+(add-hook 'web-mode-before-auto-complete-hooks
+          '(lambda ()
+             (let ((web-mode-cur-language
+                    (web-mode-language-at-pos)))
+               (if (string= web-mode-cur-language "css")
+                   (setq emmet-use-css-transform t)
+                 (setq emmet-use-css-transform nil)))))
+(defun enable-minor-mode (my-pair)
+  "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
+  (if (buffer-file-name)
+      (if (string-match (car my-pair) buffer-file-name)
+          (funcall (cdr my-pair)))))
+(add-hook 'web-mode-hook #'(lambda ()
+                            (enable-minor-mode
+                             '("\\.jsx?\\'" . flycheck-mode))))
+(add-hook 'web-mode-hook #'(lambda ()
+                            (enable-minor-mode
+                             '("\\.jsx?\\'" . prettier-js-mode))))
 
 ;; ac-html
 ;; NOTE: could make the editing slow if added
 (defun setup-ac-for-html ()
+  "Setup for ac-html."
   (require 'ac-html)
   (require 'ac-html-default-data-provider)
   (ac-html-enable-data-provider 'ac-html-default-data-provider)
@@ -268,11 +299,24 @@
 
 ;; tide
 (defun setup-tide-mode ()
+  "Tide mode setup."
   (interactive)
   (tide-setup)
   (eldoc-mode 1)
   (tide-hl-identifier-mode 1)
   (ac-company-define-source ac-source-company-tide company-tide))
+
+;; web-beautify
+(eval-after-load 'css-mode
+  '(define-key css-mode-map (kbd "C-c b") 'web-beautify-css))
+(eval-after-load 'json-mode
+  '(define-key json-mode-map (kbd "C-c b") 'web-beautify-js))
+(eval-after-load 'web-mode
+  '(progn
+     (define-key web-mode-map (kbd "C-c b h") 'web-beautify-html)
+     (define-key web-mode-map (kbd "C-c b j") 'web-beautify-js)))
+
+;; prettier-js
 
 ;; add-node-modules-path
 (require 'add-node-modules-path)
@@ -295,7 +339,9 @@
 (add-hook 'rainbow-mode-hook (lambda () (diminish 'rainbow-mode)))
 (add-hook 'tern-mode-hook (lambda () (diminish 'tern-mode "TN")))
 (add-hook 'emmet-mode-hook (lambda () (diminish 'emmet-mode "EM")))
-(add-hook 'eldoc-mode-hook (lambda () (diminish 'eldoc-mode "EL")))
+(add-hook 'eldoc-mode-hook (lambda () (diminish 'eldoc-mode "ED")))
+(add-hook 'flycheck-mode-hook (lambda () (diminish 'flycheck-mode "FC")))
+(add-hook 'prettier-js-mode-hook (lambda () (diminish 'prettier-js-mode "PR")))
 
 ;;=========================================================================
 ;;; General Settings
@@ -347,7 +393,7 @@
 (global-linum-mode 1)
 
 ;; customize the width of both fringes
-(fringe-mode '(16 . 8))
+(fringe-mode '(16 . 13))
 
 ;; allow one to see matching pairs of parentheses and other characters
 (show-paren-mode 1)
@@ -471,5 +517,5 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (company-tern add-node-modules-path rainbow-mode tide indium ace-window change-inner popwin smart-forward ac-emmet json-mode ac-html tern tern-auto-complete js2-mode react-snippets emmet-mode web-mode rainbow-identifiers dumb-jump hlinum git-gutter-fringe yafolding git-gutter whole-line-or-region git-timemachine magit highlight-numbers auto-highlight-symbol diminish golden-ratio volatile-highlights spaceline spacemacs-theme doom-themes htmlize buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
+    (markdown-mode prettier-js web-beautify company-tern add-node-modules-path rainbow-mode tide indium ace-window change-inner popwin smart-forward ac-emmet json-mode ac-html tern tern-auto-complete js2-mode react-snippets emmet-mode web-mode rainbow-identifiers dumb-jump hlinum git-gutter-fringe yafolding git-gutter whole-line-or-region git-timemachine magit highlight-numbers auto-highlight-symbol diminish golden-ratio volatile-highlights spaceline spacemacs-theme doom-themes htmlize buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
 
