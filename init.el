@@ -76,6 +76,10 @@
 (global-set-key (kbd "C-\"") 'avy-goto-char-2)
 (global-set-key (kbd "C-|") 'avy-goto-line)
 
+;; avy-zap
+(global-set-key (kbd "M-z") 'avy-zap-to-char-dwim)
+(global-set-key (kbd "M-Z") 'avy-zap-up-to-char-dwim)
+
 ;; ace-window
 (global-set-key (kbd "C-x o") 'ace-window)
 
@@ -119,12 +123,9 @@
 ;          (lambda ()
 ;            (add-to-list 'ac-sources 'ac-source-company-elisp)))
 
-;; jedi
-(add-hook 'python-mode-hook 'jedi:setup)
-
 ;; yasnippet
 (yas-global-mode)
-(global-set-key (kbd "C-c C-y t") 'yas-describe-tables)
+(global-set-key (kbd "C-c y t") 'yas-describe-tables)
 
 ;; yasnippet-snippets
 ;; NOTE: need to delete "param-comment", "return-comment",
@@ -133,14 +134,22 @@
 (require 'yasnippet-snippets)
 
 ;; auto-yasnippet
-(global-set-key (kbd "C-c C-y c") 'aya-create)
-(global-set-key (kbd "C-c C-y e") 'aya-expand)
+(global-set-key (kbd "C-c y c") 'aya-create)
+(global-set-key (kbd "C-c y e") 'aya-expand)
 
 ;; dumb-jump
 (setq dumb-jump-selector 'helm)
 (global-set-key (kbd "M-g j") 'dumb-jump-go)
 (global-set-key (kbd "M-g b") 'dumb-jump-back)
 (global-set-key (kbd "M-g q") 'dumb-jump-quick-look)
+
+;; projectile
+(projectile-global-mode)
+(setq projectile-completion-system 'helm)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
+;; helm-projectile
+(helm-projectile-on)
 
 ;; neotree
 (global-set-key [F8] 'neotree-toggle)
@@ -247,6 +256,9 @@
 (setq-default flycheck-indication-mode 'right-fringe)
 (flycheck-add-mode 'javascript-eslint 'web-mode)
 
+;; jedi
+(add-hook 'python-mode-hook 'jedi:setup)
+
 ;; markdown-mode
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
@@ -349,6 +361,7 @@
 (diminish 'beacon-mode)
 (diminish 'undo-tree-mode)
 (diminish 'which-key-mode)
+(diminish 'projectile-mode)
 (diminish' git-gutter-mode)
 (diminish 'visual-line-mode)
 (diminish 'auto-revert-mode)
@@ -537,5 +550,5 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (markdown-mode prettier-js web-beautify company-tern add-node-modules-path rainbow-mode tide indium ace-window change-inner popwin smart-forward ac-emmet json-mode ac-html tern tern-auto-complete js2-mode react-snippets emmet-mode web-mode rainbow-identifiers dumb-jump hlinum git-gutter-fringe yafolding git-gutter whole-line-or-region git-timemachine magit highlight-numbers auto-highlight-symbol diminish golden-ratio volatile-highlights spaceline spacemacs-theme doom-themes htmlize buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
+    (avy-zap helm-projectile projectile markdown-mode prettier-js web-beautify company-tern add-node-modules-path rainbow-mode tide indium ace-window change-inner popwin smart-forward ac-emmet json-mode ac-html tern tern-auto-complete js2-mode react-snippets emmet-mode web-mode rainbow-identifiers dumb-jump hlinum git-gutter-fringe yafolding git-gutter whole-line-or-region git-timemachine magit highlight-numbers auto-highlight-symbol diminish golden-ratio volatile-highlights spaceline spacemacs-theme doom-themes htmlize buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
 
