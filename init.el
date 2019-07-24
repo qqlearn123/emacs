@@ -74,7 +74,6 @@
 ;; avy
 (global-set-key (kbd "C-'") 'avy-goto-char)
 (global-set-key (kbd "C-\"") 'avy-goto-char-2)
-(global-set-key (kbd "C-:") 'avy-goto-word-1)
 (global-set-key (kbd "C-|") 'avy-goto-line)
 
 ;; ace-window
@@ -82,13 +81,28 @@
 
 ;; helm
 (require 'helm-config)
-(helm-mode)
+(helm-mode 1)
+(setq-default helm-display-buffer-default-height 16)
+(setq helm-default-display-buffer-functions '(display-buffer-in-side-window))
 (global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-x b") 'helm-mini)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-M-y") 'helm-show-kill-ring)
 
 ;; helm-swoop
+(defvar helm-display-help-buffer-regexp '("*.*Helm.*Help.**"))
+(defvar helm-display-buffer-regexp
+  `("*.*helm.**"
+    (display-buffer-in-side-window)
+    (inhibit-same-window . t)
+    (side . bottom)
+    (window-height . 0.4)))
+(defun display-helm-window (buffer &optional resume)
+  (let ((display-buffer-alist
+         (list helm-display-help-buffer-regexp
+               helm-display-buffer-regexp)))
+    (helm-default-display-buffer buffer)))
+(setq helm-swoop-split-window-function 'display-helm-window)
 (global-set-key (kbd "C-s") 'helm-swoop)
 
 ;; auto-complete
@@ -133,6 +147,8 @@
 
 ;; undo-tree
 (global-undo-tree-mode)
+(define-key undo-tree-map (kbd "C-_") nil)
+(define-key undo-tree-map (kbd "M-_") nil)
 
 ;; goto-chg
 (global-set-key (kbd "C-<") 'goto-last-change)
@@ -198,9 +214,13 @@
 
 ;; multiple-cursors
 (require 'multiple-cursors)
-(global-set-key (kbd "C-:") 'mc/mark-all-like-this)
-(global-set-key (kbd "C-S-c") 'mc/edit-lines)
 (define-key mc/keymap (kbd "<return>") nil)
+(global-set-key (kbd "C-:") 'mc/edit-lines)
+(global-set-key (kbd "C-+") 'mc/mark-next-like-this)
+(global-set-key (kbd "M-+") 'mc/skip-to-next-like-this)
+(global-set-key (kbd "C-_") 'mc/mark-previous-like-this)
+(global-set-key (kbd "M-_") 'mc/skip-to-previous-like-this)
+(global-set-key (kbd "C-M-<mouse-1>") 'mc/add-cursor-on-click)
 
 ;; buffer-move
 (global-set-key (kbd "<C-S-up>") 'buf-move-up)
