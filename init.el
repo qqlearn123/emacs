@@ -68,6 +68,10 @@
 ;; highlight-numbers
 (add-hook 'prog-mode-hook 'highlight-numbers-mode)
 
+;; highlight-indentation
+(require 'highlight-indentation)
+(add-hook 'prog-mode-hook 'highlight-indentation-current-column-mode)
+
 ;; volatile-highlights
 (volatile-highlights-mode 1)
 
@@ -143,6 +147,12 @@
 (global-set-key (kbd "M-g b") 'dumb-jump-back)
 (global-set-key (kbd "M-g q") 'dumb-jump-quick-look)
 
+;; ag
+(setq ag-reuse-buffers 't)
+(setq ag-highlight-search t)
+
+;; helm-ag
+
 ;; projectile
 (projectile-global-mode)
 (setq projectile-completion-system 'helm)
@@ -192,6 +202,8 @@
   "XXXXXXXX"
   "XXXXXXXX")
 
+;; git-timemachine
+
 ;; magit
 (global-set-key (kbd "C-x g") 'magit-status)
 
@@ -203,6 +215,11 @@
 
 ;; move-text
 (move-text-default-bindings)
+
+;; move-dup
+(require 'move-dup)
+(global-set-key (kbd "C-c u") 'md-duplicate-up)
+(global-set-key (kbd "C-c d") 'md-duplicate-down)
 
 ;; change-inner
 (global-set-key (kbd "M-i") 'change-inner)
@@ -250,6 +267,12 @@
 ;; fill-column-indicator
 (setq fci-rule-column 80)
 (setq fci-rule-width 11)
+
+;; hungry-delete
+;(global-hungry-delete-mode)
+
+;; miniedit
+(miniedit-install)
 
 ;; flycheck
 ;(add-hook 'after-init-hook #'global-flycheck-mode)
@@ -355,6 +378,9 @@
 (add-hook 'js-mode-hook #'add-node-modules-path)
 (add-hook 'web-mode-hook #'add-node-modules-path)
 
+;; google-this
+(google-this-mode 1)
+
 ;; diminish
 (diminish 'anzu-mode)
 (diminish 'helm-mode)
@@ -364,17 +390,20 @@
 (diminish 'projectile-mode)
 (diminish' git-gutter-mode)
 (diminish 'visual-line-mode)
+(diminish 'google-this-mode)
 (diminish 'auto-revert-mode)
 (diminish 'golden-ratio-mode)
 (diminish 'volatile-highlights-mode)
 (diminish 'whole-line-or-region-local-mode)
-(diminish 'yas-minor-mode "YA")
+(diminish 'yas-minor-mode "YS")
+(diminish 'highlight-indentation-current-column-mode "HI")
 (add-hook 'rainbow-mode-hook (lambda () (diminish 'rainbow-mode)))
 (add-hook 'tern-mode-hook (lambda () (diminish 'tern-mode "TN")))
 (add-hook 'emmet-mode-hook (lambda () (diminish 'emmet-mode "EM")))
 (add-hook 'eldoc-mode-hook (lambda () (diminish 'eldoc-mode "ED")))
 (add-hook 'flycheck-mode-hook (lambda () (diminish 'flycheck-mode "FC")))
 (add-hook 'prettier-js-mode-hook (lambda () (diminish 'prettier-js-mode "PR")))
+
 
 ;;=========================================================================
 ;;; General Settings
@@ -550,5 +579,5 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (avy-zap helm-projectile projectile markdown-mode prettier-js web-beautify company-tern add-node-modules-path rainbow-mode tide indium ace-window change-inner popwin smart-forward ac-emmet json-mode ac-html tern tern-auto-complete js2-mode react-snippets emmet-mode web-mode rainbow-identifiers dumb-jump hlinum git-gutter-fringe yafolding git-gutter whole-line-or-region git-timemachine magit highlight-numbers auto-highlight-symbol diminish golden-ratio volatile-highlights spaceline spacemacs-theme doom-themes htmlize buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
+    (google-this ag highlight-indentation miniedit move-dup avy-zap helm-projectile projectile markdown-mode prettier-js web-beautify company-tern add-node-modules-path rainbow-mode tide indium ace-window change-inner popwin smart-forward ac-emmet json-mode ac-html tern tern-auto-complete js2-mode react-snippets emmet-mode web-mode rainbow-identifiers dumb-jump hlinum git-gutter-fringe yafolding git-gutter whole-line-or-region git-timemachine magit highlight-numbers auto-highlight-symbol diminish golden-ratio volatile-highlights spaceline spacemacs-theme doom-themes htmlize buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
 
