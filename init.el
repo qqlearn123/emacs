@@ -6,6 +6,9 @@
                          ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 
+;; load path setup
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+
 ;; theme
 (load-theme 'zenburn t)
 ;(load-theme 'spacemacs-dark t)
@@ -119,7 +122,6 @@
 (setq-default ac-sources (push 'ac-source-yasnippet ac-sources))
 
 ;; ac-company
-(add-to-list 'load-path "~/.emacs.d/elpa/ac-company")
 (require 'ac-company)
 ;(ac-company-define-source ac-source-company-elisp company-elisp
 ;                          (symbol . "z"))
@@ -162,7 +164,7 @@
 (helm-projectile-on)
 
 ;; neotree
-(global-set-key [F8] 'neotree-toggle)
+(global-set-key (kbd "C-x t") 'neotree-toggle)
 
 ;; undo-tree
 (global-undo-tree-mode)
@@ -206,6 +208,10 @@
 
 ;; magit
 (global-set-key (kbd "C-x g") 'magit-status)
+
+;; mark-lines
+(require 'mark-lines)
+(global-set-key (kbd "C->") 'mark-lines-next-line)
 
 ;; whole-line-or-region
 (whole-line-or-region-global-mode)
@@ -431,19 +437,13 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
-;; modeline settings
-; show cursor position
+;; customize the modeline
 (column-number-mode 1)
-
-; show time and date
-(setq display-time-day-and-date t)
-(display-time-mode 1)
-
-; show file size
 (size-indication-mode 1)
 
-;; change the cursor type to bar
+;; set the cursor type and color
 (setq-default cursor-type 'bar)
+;(set-cursor-color "#3498DB")
 
 ;; turn on highlighting current line
 (global-hl-line-mode 1)
@@ -466,7 +466,7 @@
 ;; control whether tabs are used for indentation
 (setq-default indent-tabs-mode nil)
 
-;; change the indentation level for CC modes (C, C++, Java, etc.)
+;; set the indentation level for CC modes (C, C++, Java, etc.)
 (setq-default c-basic-offset 4)
 
 ;; remove text in active region if inserting text
@@ -487,11 +487,31 @@
 ;; turn the alarm off totally
 (setq ring-bell-function 'ignore)
 
-;; let you move point from window to window using Shift and the arrow keys
+;; let you move point from window to window using <Shift> and the arrow keys
 (windmove-default-keybindings)
+
+;; undo and redo window configuration
+(winner-mode 1)
 
 ;; set the default directory
 (setq default-directory "~/")
+
+;; prefer the utf-8 coding system
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+
+;; give meaningful names for buffers with the same name
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
+(setq uniquify-separator "/")
+(setq uniquify-after-kill-buffer-p t)
+(setq uniquify-ignore-buffers-re "^\\*")
+
+;; set up ediff (emacs' diff)
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+(setq ediff-split-window-function 'split-window-horizontally)
 
 ;; build a list of recently opened files saved across sessions
 (recentf-mode 1)
@@ -503,11 +523,35 @@
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups/")))
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/autosaves/" t)))
 
+;; mark the current line
+(defun mark-whole-line ()
+  (interactive)
+  (move-beginning-of-line nil)
+  (set-mark-command nil)
+  (move-end-of-line nil))
+(global-set-key (kbd "C-.") 'mark-whole-line)
+
+;; join the line you're on with the line above it in a resonable manner
+(global-set-key (kbd "M-j") 'join-line)
+
+;; provide a variety of completions and expansions
+(setq hippie-expand-try-functions-list '(try-expand-dabbrev
+                                         try-expand-dabbrev-all-buffers
+                                         try-expand-dabbrev-from-kill
+                                         try-complete-file-name-partially
+                                         try-complete-file-name
+                                         try-expand-all-abbrevs
+                                         try-expand-list
+                                         try-expand-line))
+(global-set-key (kbd "M-/") 'hippie-expand)
+
+;; make C-z do nothing
+(global-unset-key (kbd "C-z"))
+
 
 ;;=========================================================================
 ;;; Org-mode Settings
 ;;=========================================================================
-(add-to-list 'load-path "~/.emacs.d/elpa/org-9.1.9")
 (require 'org)
 
 ;; basics
