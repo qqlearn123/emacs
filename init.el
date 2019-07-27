@@ -13,6 +13,7 @@
 ;; theme
 (load-theme 'zenburn t)
 ;(load-theme 'spacemacs-dark t)
+;(load-theme 'gruvbox-light-hard t)
 
 ;; powerline
 (setq powerline-default-separator 'wave)
@@ -78,6 +79,14 @@
 
 ;; volatile-highlights
 (volatile-highlights-mode 1)
+
+;; iy-go-to-char
+(require 'iy-go-to-char)
+(setq iy-go-to-char-override-local-map nil)
+(global-set-key (kbd "C-c f") 'iy-go-up-to-char)
+(global-set-key (kbd "C-c b") 'iy-go-up-to-char-backward)
+(global-set-key (kbd "C-c ;") 'iy-go-to-or-up-to-continue)
+(global-set-key (kbd "C-c ,") 'iy-go-to-or-up-to-continue-backward)
 
 ;; avy
 (global-set-key (kbd "C-'") 'avy-goto-char)
@@ -247,6 +256,7 @@
 
 ;; multiple-cursors
 (require 'multiple-cursors)
+(add-to-list 'mc/cursor-specific-vars 'iy-go-to-char-start-pos)
 (define-key mc/keymap (kbd "<return>") nil)
 (global-set-key (kbd "C-:") 'mc/edit-lines)
 (global-set-key (kbd "C-+") 'mc/mark-next-like-this)
@@ -423,7 +433,8 @@
 (setq initial-frame-alist
       '((width . 110)
         (height . 35)
-        (font . "Consolas-10")))
+        (font . "DejaVu Sans Mono-10")))
+        ;(font . "Consolas-10")))
 
 (setq frame-title-format
       (format
@@ -624,5 +635,5 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (org google-this ag highlight-indentation miniedit move-dup avy-zap helm-projectile projectile markdown-mode prettier-js web-beautify company-tern add-node-modules-path rainbow-mode tide indium ace-window change-inner popwin smart-forward ac-emmet json-mode ac-html tern tern-auto-complete js2-mode react-snippets emmet-mode web-mode rainbow-identifiers dumb-jump hlinum git-gutter-fringe yafolding git-gutter whole-line-or-region git-timemachine magit highlight-numbers auto-highlight-symbol diminish golden-ratio volatile-highlights spaceline spacemacs-theme doom-themes htmlize buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
+    (gruvbox-theme iy-go-to-char org google-this ag highlight-indentation miniedit move-dup avy-zap helm-projectile projectile markdown-mode prettier-js web-beautify company-tern add-node-modules-path rainbow-mode tide indium ace-window change-inner popwin smart-forward ac-emmet json-mode ac-html tern tern-auto-complete js2-mode react-snippets emmet-mode web-mode rainbow-identifiers dumb-jump hlinum git-gutter-fringe yafolding git-gutter whole-line-or-region git-timemachine magit highlight-numbers auto-highlight-symbol diminish golden-ratio volatile-highlights spaceline spacemacs-theme doom-themes htmlize buffer-move goto-chg 2048-game helm-swoop fill-column-indicator helm-mode-manager hungry-delete popup-kill-ring smooth-scrolling beacon flycheck yapfify jedi auto-yasnippet yasnippet iedit multiple-cursors anzu helm-ag expand-region move-text rainbow-delimiters which-key moe-theme undo-tree solarized-theme smex smartparens powerline neotree indent-guide helm avy auto-complete))))
 
