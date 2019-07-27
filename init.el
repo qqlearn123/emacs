@@ -433,8 +433,8 @@
 (setq initial-frame-alist
       '((width . 110)
         (height . 35)
-        (font . "DejaVu Sans Mono-10")))
-        ;(font . "Consolas-10")))
+        (font . "Consolas-10")))
+        ;(font . "DejaVu Sans Mono-10")))
 
 (setq frame-title-format
       (format
