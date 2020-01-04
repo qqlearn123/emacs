@@ -221,7 +221,7 @@
 
 ;; mark-lines
 (require 'mark-lines)
-(global-set-key (kbd "C->") 'mark-lines-next-line)
+(global-set-key (kbd "C-M-,") 'mark-lines-previous-line)
 
 ;; whole-line-or-region
 (whole-line-or-region-global-mode)
@@ -258,6 +258,7 @@
 (require 'multiple-cursors)
 (add-to-list 'mc/cursor-specific-vars 'iy-go-to-char-start-pos)
 (define-key mc/keymap (kbd "<return>") nil)
+(global-set-key (kbd "C->") 'mc/mark-pop)
 (global-set-key (kbd "C-:") 'mc/edit-lines)
 (global-set-key (kbd "C-+") 'mc/mark-next-like-this)
 (global-set-key (kbd "M-+") 'mc/skip-to-next-like-this)
@@ -394,6 +395,8 @@
 (require 'add-node-modules-path)
 (add-hook 'js-mode-hook #'add-node-modules-path)
 (add-hook 'web-mode-hook #'add-node-modules-path)
+
+;; lorem-ipsum
 
 ;; google-this
 (google-this-mode 1)
@@ -635,5 +638,5 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (tern-auto-complete tern gruvbox-theme iy-go-to-char google-this ag highlight-indentation miniedit move-dup prettier-js web-beautify add-node-modules-path change-inner popwin smart-forward ac-emmet json-mode ac-html react-snippets emmet-mode rainbow-identifiers hlinum git-gutter-fringe yafolding git-gutter whole-line-or-region highlight-numbers auto-highlight-symbol volatile-highlights buffer-move goto-chg 2048-game helm-mode-manager hungry-delete popup-kill-ring smooth-scrolling beacon iedit anzu helm-ag expand-region move-text moe-theme undo-tree smex powerline neotree auto-complete))))
+    (lorem-ipsum tern-auto-complete tern gruvbox-theme iy-go-to-char google-this ag highlight-indentation miniedit move-dup prettier-js web-beautify add-node-modules-path change-inner popwin smart-forward ac-emmet json-mode ac-html react-snippets emmet-mode rainbow-identifiers hlinum git-gutter-fringe yafolding git-gutter whole-line-or-region highlight-numbers auto-highlight-symbol volatile-highlights buffer-move goto-chg 2048-game helm-mode-manager hungry-delete popup-kill-ring smooth-scrolling beacon iedit anzu helm-ag expand-region move-text moe-theme undo-tree smex powerline neotree auto-complete))))
 
