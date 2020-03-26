@@ -131,6 +131,23 @@
 (add-to-list 'ac-modes 'org-mode)
 (setq-default ac-sources (push 'ac-source-yasnippet ac-sources))
 
+;; company
+(setq company-minimum-prefix-length 2)
+(setq company-selection-wrap-around t)
+(dolist (pyhook '(python-mode-hook
+                  inferior-python-mode-hook))
+  (add-hook pyhook
+            (lambda()
+              (auto-complete-mode -1)
+              (company-mode)
+              (add-to-list (make-local-variable 'company-backends)
+                           '(company-anaconda
+                             company-capf
+                             company-yasnippet
+                             company-dabbrev
+                             company-keywords
+                             company-files)))))
+
 ;; ac-company
 (require 'ac-company)
 ;(ac-company-define-source ac-source-company-elisp company-elisp
@@ -297,8 +314,13 @@
 (setq-default flycheck-indication-mode 'right-fringe)
 (flycheck-add-mode 'javascript-eslint 'web-mode)
 
-;; jedi
-(add-hook 'python-mode-hook 'jedi:setup)
+;; anaconda-mode
+(add-hook 'python-mode-hook 'anaconda-mode)
+(add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+
+;; pyvenv
+(setenv "WORKON_HOME" "C:/Users/Qilong/anaconda3/envs")
+(pyvenv-mode 1)
 
 ;; markdown-mode
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
@@ -405,6 +427,7 @@
 (diminish 'anzu-mode)
 (diminish 'helm-mode)
 (diminish 'beacon-mode)
+(diminish 'yas-minor-mode)
 (diminish 'undo-tree-mode)
 (diminish 'which-key-mode)
 (diminish 'projectile-mode)
@@ -415,12 +438,12 @@
 (diminish 'golden-ratio-mode)
 (diminish 'volatile-highlights-mode)
 (diminish 'whole-line-or-region-local-mode)
-(diminish 'yas-minor-mode "YS")
-(diminish 'highlight-indentation-current-column-mode "HI")
+(diminish 'highlight-indentation-current-column-mode)
 (add-hook 'rainbow-mode-hook (lambda () (diminish 'rainbow-mode)))
 (add-hook 'tern-mode-hook (lambda () (diminish 'tern-mode "TN")))
 (add-hook 'emmet-mode-hook (lambda () (diminish 'emmet-mode "EM")))
 (add-hook 'eldoc-mode-hook (lambda () (diminish 'eldoc-mode "ED")))
+(add-hook 'anaconda-mode-hook (lambda () (diminish 'anaconda-mode "AN")))
 (add-hook 'flycheck-mode-hook (lambda () (diminish 'flycheck-mode "FC")))
 (add-hook 'prettier-js-mode-hook (lambda () (diminish 'prettier-js-mode "PR")))
 
@@ -638,5 +661,5 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (lorem-ipsum tern-auto-complete tern gruvbox-theme iy-go-to-char google-this ag highlight-indentation miniedit move-dup prettier-js web-beautify add-node-modules-path change-inner popwin smart-forward ac-emmet json-mode ac-html react-snippets emmet-mode rainbow-identifiers hlinum git-gutter-fringe yafolding git-gutter whole-line-or-region highlight-numbers auto-highlight-symbol volatile-highlights buffer-move goto-chg 2048-game helm-mode-manager hungry-delete popup-kill-ring smooth-scrolling beacon iedit anzu helm-ag expand-region move-text moe-theme undo-tree smex powerline neotree auto-complete))))
+    (company-anaconda pyvenv anaconda-mode lorem-ipsum tern-auto-complete tern gruvbox-theme iy-go-to-char google-this ag highlight-indentation miniedit move-dup prettier-js web-beautify add-node-modules-path change-inner popwin smart-forward ac-emmet json-mode ac-html react-snippets emmet-mode rainbow-identifiers hlinum git-gutter-fringe yafolding git-gutter whole-line-or-region highlight-numbers auto-highlight-symbol volatile-highlights buffer-move goto-chg 2048-game helm-mode-manager hungry-delete popup-kill-ring smooth-scrolling beacon iedit anzu helm-ag expand-region move-text moe-theme undo-tree smex powerline neotree auto-complete))))
 
