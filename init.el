@@ -351,11 +351,10 @@
       (if (string-match (car my-pair) buffer-file-name)
           (funcall (cdr my-pair)))))
 (add-hook 'web-mode-hook #'(lambda ()
-                            (enable-minor-mode
-                             '("\\.jsx?\\'" . flycheck-mode))))
-(add-hook 'web-mode-hook #'(lambda ()
-                            (enable-minor-mode
-                             '("\\.jsx?\\'" . prettier-js-mode))))
+                             (enable-minor-mode
+                              '("\\.jsx?\\'" . flycheck-mode))
+                             (enable-minor-mode
+                              '("\\.jsx?\\'" . prettier-js-mode))))
 
 ;; ac-html
 ;; NOTE: could make the editing slow if added
