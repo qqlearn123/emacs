@@ -310,8 +310,12 @@
 (miniedit-install)
 
 ;; flycheck
-;(add-hook 'after-init-hook #'global-flycheck-mode)
 (setq-default flycheck-indication-mode 'right-fringe)
+(setq-default flycheck-python-flake8-executable "python")
+(setq-default flycheck-python-pycompile-executable "python")
+(setq-default flycheck-python-pylint-executable "python")
+;(add-hook 'after-init-hook #'global-flycheck-mode)
+(add-hook 'python-mode-hook 'flycheck-mode)
 (flycheck-add-mode 'javascript-eslint 'web-mode)
 
 ;; anaconda-mode
