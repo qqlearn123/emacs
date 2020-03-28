@@ -515,6 +515,9 @@
 ;; set the indentation level for CC modes (C, C++, Java, etc.)
 (setq-default c-basic-offset 4)
 
+;; use ipython for python interpreter
+(setq-default python-shell-interpreter "ipython")
+
 ;; remove text in active region if inserting text
 (delete-selection-mode 1)
 
