@@ -315,12 +315,16 @@
 (setq-default flycheck-python-pycompile-executable "python")
 (setq-default flycheck-python-pylint-executable "python")
 ;(add-hook 'after-init-hook #'global-flycheck-mode)
-(add-hook 'python-mode-hook 'flycheck-mode)
+;(add-hook 'python-mode-hook 'flycheck-mode)
 (flycheck-add-mode 'javascript-eslint 'web-mode)
 
 ;; anaconda-mode
 (add-hook 'python-mode-hook 'anaconda-mode)
 (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+
+;; ein
+
+;; yapfify
 
 ;; pyvenv
 (setenv "WORKON_HOME" "C:/Users/Qilong/anaconda3/envs")
@@ -333,6 +337,7 @@
 (setq markdown-command "D:/Apps/MultiMarkdown-Windows-6.4.0/bin/multimarkdown.exe")
 
 ;; json-mode
+(add-to-list 'ac-modes 'json-mode)
 
 ;; web-mode
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
@@ -355,8 +360,8 @@
       (if (string-match (car my-pair) buffer-file-name)
           (funcall (cdr my-pair)))))
 (add-hook 'web-mode-hook #'(lambda ()
-                             (enable-minor-mode
-                              '("\\.jsx?\\'" . flycheck-mode))
+;                             (enable-minor-mode
+;                              '("\\.jsx?\\'" . flycheck-mode))
                              (enable-minor-mode
                               '("\\.jsx?\\'" . prettier-js-mode))))
 
