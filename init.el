@@ -325,6 +325,7 @@
 ;; ein
 
 ;; yapfify
+(define-key python-mode-map (kbd "C-c C-y") 'yapfify-buffer)
 
 ;; pyvenv
 (setenv "WORKON_HOME" "C:/Users/Qilong/anaconda3/envs")
